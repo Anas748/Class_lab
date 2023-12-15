@@ -34,8 +34,7 @@ public class Lab {
     /**
      * @param args the command line arguments
      */
-    
-         public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         String dbName = "world_cup";
         String[] teams = {"Ireland", "Brazil", "Argentina", "Japan", "Mexico", "Senegal", "Tunisia", "Qatar"};
         String DB_URL = "jdbc:mysql://localhost/" + dbName;
@@ -224,7 +223,8 @@ public class Lab {
                 System.out.println("That is not a number. Please try again!");
             }         
         } while (!exit);   
-    }     
-    }
+    }  
+}
+
     
 
