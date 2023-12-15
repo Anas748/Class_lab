@@ -1,4 +1,4 @@
-package javaapplication19;
+package lab;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,3 +21,7 @@ public class DatabaseManager {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
         }
     }
+    
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(DB_URL, USER, PASS);
+        
