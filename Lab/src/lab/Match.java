@@ -4,9 +4,11 @@
  */
 package lab;
 
+import java.util.Random;
+
 /**
  *
- * @author PC
+ * @author Haider
  */
 public class Match {
     // team 1 an 2 represents the two teams
@@ -39,5 +41,18 @@ public class Match {
 
     public int getTeam2Score() {
         return team2Score;
+    }
+    
+    // use simulate method for match to print random score for team
+      public void simulateMatch() {
+        Random random = new Random();
+        team1Score = random.nextInt(6); // Random score between 0 and 5
+        team2Score = random.nextInt(6);
+
+        System.out.println("Simulation Result:");
+        System.out.println(team1.getName() + " " + team1Score + " - " + team2Score + " " + team2.getName());
+        
+        updatePlayersWithMatchResult(team1, team1Score);
+        updatePlayersWithMatchResult(team2, team2Score);
     }
 }
