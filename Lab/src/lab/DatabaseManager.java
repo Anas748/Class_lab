@@ -32,4 +32,4 @@ public class DatabaseManager {
     try {
         conn = DriverManager.getConnection("jdbc:mysql://localhost/", USER, PASS);
         stmt = conn.createStatement();
-        
+    }
