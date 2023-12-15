@@ -9,5 +9,10 @@ package lab;
  * @author user
  */
 public class Player {
-    
+    private String name;
+    private int number;
+    private String birth;
+    private String position;
+    private int goalsScored;
+    private String background;
 }
