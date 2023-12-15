@@ -64,5 +64,25 @@ public class Match {
         }
     }
       
-      
+        public String getResult() {
+        // Implement the logic to determine and return the match result
+        
+        if (team1Score > team2Score) {
+            //team1 win
+            return String.format("Congratulations %s! %s scored %d goals and %s scored %d goals.",
+                    team1.getName(), team1.getName(), team1Score, team2.getName(), team2Score);   
+        }
+        
+        //team2 win
+        else if (team1Score < team2Score) {
+            return String.format("Congratulations %s! %s scored %d goals and %s scored %d goals.",
+                    team2.getName(), team1.getName(), team1Score, team2.getName(), team2Score);
+        }
+        
+        //match draw
+        else {
+            return String.format("It was a draw!! %s scored %d goals and %s scored %d goals.",
+                    team1.getName(), team1Score, team2.getName(), team2Score);
+        }
+} 
 }
