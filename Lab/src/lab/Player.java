@@ -76,6 +76,7 @@ public class Player {
     public void setBackground(String background) {
         this.background = background;
     }
+
     public static Player createPlayer(Scanner sc) {
              String name;
         int number = 0;
@@ -128,5 +129,25 @@ public class Player {
 
         return new Player(name, number, birth, position, goalsScored, background);
     }
-}
-   
+    public void saveToDatabase(String teamName, String dbUrl, String user, String pass) {
+        String insertQuery = "INSERT INTO " + teamName + " (name, number, birth, position, goalsScored, background) VALUES (?, ?, ?, ?, ?, ?)";
+        
+
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, user, pass);
+             PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
+
+            pstmt.setString(1, name);
+            pstmt.setInt(2, number);
+            pstmt.setString(3, birth);
+            pstmt.setString(4, position);
+            pstmt.setInt(5, goalsScored);
+            pstmt.setString(6, background);
+         
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+} 

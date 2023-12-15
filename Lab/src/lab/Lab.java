@@ -34,6 +34,7 @@ public class Lab {
     /**
      * @param args the command line arguments
      */
+
     
          public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
          String[] teams = {"Ireland", "Brazil", "Argentina", "Japan", "Mexico", "Senegal", "Tunisia", "Qatar"};
@@ -124,9 +125,6 @@ public class Lab {
         DatabaseManager.displayPlayersOnTeam(teamName);
     }
     }
-
-
-
     private static void simulateMatches(String[] teams, Scanner sc) {
         System.out.println("How many matches would you like to simulate?");
         int numMatches = Integer.parseInt(sc.nextLine());
@@ -148,4 +146,5 @@ public class Lab {
 }
 
     
+
 
