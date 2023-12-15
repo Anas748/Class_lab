@@ -55,4 +55,14 @@ public class Match {
         updatePlayersWithMatchResult(team1, team1Score);
         updatePlayersWithMatchResult(team2, team2Score);
     }
+      
+      //update each player in team base on goal score
+        private void updatePlayersWithMatchResult(Team team, int goalsScored) {
+        for (Player player : team.getPlayers()) {
+            player.setGoalsScored(player.getGoalsScored() + goalsScored);
+            // You can add more logic here to update other player statistics
+        }
+    }
+      
+      
 }
