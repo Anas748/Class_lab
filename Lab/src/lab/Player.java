@@ -16,3 +16,11 @@ public class Player {
     private int goalsScored;
     private String background;
 }
+   public Player(String name, int number, String birth, String position, int goalsScored, String background) {
+        this.name = name;
+        this.number = number;
+        this.birth = birth;
+        this.position = position;
+        this.goalsScored = goalsScored;
+        this.background = background;
+    }
