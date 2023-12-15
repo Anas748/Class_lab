@@ -88,47 +88,9 @@ public class Lab {
                         if (teamName.toLowerCase().equals("exit")) break;
                         if (!validTeam) System.out.println("That is not one of the teams. Please try again!");
                     } while (!validTeam);
-                    String name;
-                    int number = 0;
-                    String birth;
-                    String position;
-                    int goalsScored = 0;
-                    String background;
+                  -----------------------------------------------------------------------------------------------------------------
                     boolean validPlayer = false;
-                    System.out.println("Please enter the player's name: ");
-                    name = sc.nextLine();
-                    System.out.println("Please enter the player's number: ");
-                    do {
-                        try {
-                            number = Integer.parseInt(sc.nextLine()); 
-                            if (number < 1) {
-                                System.out.println("Please enter a positive integer");
-                            } else validPlayer = true;
-
-                        } catch (Exception e) {
-                            System.out.println("That is not a number. please try again!");
-                        }
-                    } while (!validPlayer);                                              
-                    System.out.println("Please enter the player's date of birth: ");
-                    birth = sc.nextLine();         
-                    System.out.println("Please enter the player's position: ");
-                    position = sc.nextLine(); 
-                    System.out.println("Please enter the number of goals the player has scored: ");
-                    validPlayer = false;
-                    do {
-                        try {
-                            goalsScored = Integer.parseInt(sc.nextLine()); 
-                            if (goalsScored < 1) {
-                                System.out.println("Please enter a positive integer");
-                            } else validPlayer = true;
-
-                        } catch (Exception e) {
-                            System.out.println("That is not a number. please try again!");
-                        }
-                    } while (!validPlayer);     
-                    System.out.println("Please enter the player's background: ");
-                    background = sc.nextLine();                          
-                    System.out.println("Thank you for entering a player"); 
+          
                     try {
                         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                         Statement stmt = conn.createStatement();
@@ -140,6 +102,7 @@ public class Lab {
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }      
+                    -----------------------------------------------------------------------------------------------------
                 } else if (option == 2) {
                     boolean validTeam = false;
                     String teamName;
