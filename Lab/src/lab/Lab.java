@@ -13,7 +13,21 @@ import java.util.Scanner;
 
 /**
  *
- * @author user
+ * @author Sam
+ * Please put the names and student numbers of the team here:
+ * 
+ * Name 1:    Muhammad Ahmad
+ * Number 1:  2021385
+ * 
+ * Name 2:    Sajjad Haider
+ * Number 2:  2021384
+ * 
+ * Name 3:  Muhammad Anas Baig
+ * Number 3: 2021387
+ * 
+ * Name 4:   Abdul Rehman
+ * Number 4   2021333
+ * 
  */
 public class Lab {
 
