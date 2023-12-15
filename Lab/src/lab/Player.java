@@ -4,6 +4,12 @@
  */
 package lab;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
+
 /**
  *
  * @author Muhammad Anas Baig
@@ -70,33 +76,37 @@ public class Player {
     public void setBackground(String background) {
         this.background = background;
     }
-    public static Player createPlayer() {
-        String name;
+    public static Player createPlayer(Scanner sc) {
+             String name;
         int number = 0;
         String birth;
         String position;
         int goalsScored = 0;
         String background;
+
         System.out.println("Please enter the player's name: ");
         name = sc.nextLine();
+
         System.out.println("Please enter the player's number: ");
+        boolean validPlayer = false;
         do {
             try {
                 number = Integer.parseInt(sc.nextLine());
                 if (number < 1) {
                     System.out.println("Please enter a positive integer");
-                } else {
-                    validPlayer = true;
-                }
+                } else validPlayer = true;
 
             } catch (Exception e) {
                 System.out.println("That is not a number. please try again!");
             }
         } while (!validPlayer);
+
         System.out.println("Please enter the player's date of birth: ");
         birth = sc.nextLine();
+
         System.out.println("Please enter the player's position: ");
         position = sc.nextLine();
+
         System.out.println("Please enter the number of goals the player has scored: ");
         validPlayer = false;
         do {
@@ -104,21 +114,19 @@ public class Player {
                 goalsScored = Integer.parseInt(sc.nextLine());
                 if (goalsScored < 1) {
                     System.out.println("Please enter a positive integer");
-                } else {
-                    validPlayer = true;
-                }
+                } else validPlayer = true;
 
             } catch (Exception e) {
                 System.out.println("That is not a number. please try again!");
             }
-            while (!validPlayer);
-            System.out.println("Please enter the player's background: ");
-            background = sc.nextLine();
-            System.out.println("Thank you for entering a player");
+        } while (!validPlayer);
 
-             return new Player(name, number, birth, position, goalsScored, background);
+        System.out.println("Please enter the player's background: ");
+        background = sc.nextLine();
 
-        }
+        System.out.println("Thank you for entering a player");
+
+        return new Player(name, number, birth, position, goalsScored, background);
     }
 }
    
