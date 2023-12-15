@@ -36,122 +36,97 @@ public class Lab {
      */
     
          public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        
+         String[] teams = {"Ireland", "Brazil", "Argentina", "Japan", "Mexico", "Senegal", "Tunisia", "Qatar"};
+        DatabaseManager.createTables(teams);
+
         int option;
         boolean exit = false;
         Scanner sc = new Scanner(System.in);
+
         do {
             System.out.println("Welcome! What would you like to do today? Please enter the number corresponding to your choice.");
             System.out.println("1. Enter a new player to a team.");
             System.out.println("2. See the players on a team.");
             System.out.println("3. Simulate a number of matches.");
-            System.out.println("4. Exit the programme.");            
+            System.out.println("4. Exit the programme.");
+
             try {
                 option = Integer.parseInt(sc.nextLine());
-                if (option == 1) {
-                    boolean validTeam = false;
-                    String teamName;
-                    System.out.println("Please follow the instructions to enter player data.");
-                    do {
-                        System.out.println("For which team would you like to enter data?");
-                        teamName = sc.nextLine();
-                        for (String team : teams) {
-                            if (teamName.toLowerCase().equals(team.toLowerCase())) {
-                                validTeam = true;
-                                break;
-                            }
-                        }
-                        if (teamName.toLowerCase().equals("exit")) break;
-                        if (!validTeam) System.out.println("That is not one of the teams. Please try again!");
-                    } while (!validTeam);
-                  -----------------------------------------------------------------------------------------------------------------
-                     
-                    -----------------------------------------------------------------------------------------------------
-                } else if (option == 2) {
-                    boolean validTeam = false;
-                    String teamName;
-                    System.out.println("Please follow the instructions to get player data.");
-                    do {
-                        System.out.println("For which team would you like to get player data?");
-                        teamName = sc.nextLine();
-                        for (String team : teams) {
-                            if (teamName.toLowerCase().equals(team.toLowerCase())) {
-                                validTeam = true;
-                                break;
-                            }
-                        }
-                        if (teamName.toLowerCase().equals("exit")) break;
-                        if (!validTeam) System.out.println("That is not one of the teams. Please try again!");
-                    } while (!validTeam);
-                    try {
-                        Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                        Statement stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery("SELECT * from " + teamName + ";");
-                        String name;
-                        int number;
-                        String birth;
-                        String position;
-                        int goalsScored;
-                        String background;
-                        while (rs.next()) {
-                            name = rs.getString("name");
-                            number = rs.getInt("number");
-                            birth = rs.getString("birth");
-                            position = rs.getString("position");
-                            goalsScored = rs.getInt("goalsScored");
-                            background = rs.getString("background");              
-                            System.out.println(String.format("Name: %s -- Number: %d -- DoB: %s -- Position: %s -- Number of goals scored: %d", name, number, birth, position, goalsScored));
-                            System.out.println("Background:");
-                            System.out.println(background);
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }                     
-                } else if (option == 3) {
-                    System.out.println("How many matches would you like to simulate?");
-                    Boolean validNum = false;
-                    int numMatches = 0;
-                    do {
-                        try {
-                            numMatches = Integer.parseInt(sc.nextLine()); 
-                            if (numMatches < 1) {
-                                System.out.println("Please enter a positive integer");
-                            } else validNum = true;
 
-                        } catch (Exception e) {
-                            System.out.println("That is not a number. please try again!");
-                        }
-                    } while (!validNum);
-                    for (int matchNum = 1; matchNum <= numMatches; matchNum++) {
-                        int team1Num = (int) (Math.floor(Math.random() * teams.length));
-                        String team1 = teams[team1Num];
-                        int team2Num;
-                        do {
-                            team2Num = (int) (Math.floor(Math.random() * teams.length));
-                        } while (team1Num == team2Num);
-                        String team2 = teams[team2Num];
-                        int team1Score = (int) (Math.floor(Math.random() * 6));
-                        int team2Score = (int) (Math.floor(Math.random() * 6));
-                        System.out.println("Time for mathch: " + matchNum);
-                        if (team1Score > team2Score) {
-                            System.out.println(String.format("Congratulation %s! %s scored %d goals and %s scored %d goals.", team1, team1, team1Score, team2, team2Score));
-                        } else if (team1Score < team2Score) {
-                            System.out.println(String.format("Congratulation %s! %s scored %d goals and %s scored %d goals.", team2, team1, team1Score, team2, team2Score));
-                        } else {
-                            System.out.println(String.format("It was a draw!! %s scored %d goals and %s scored %d goals.",  team1, team1Score, team2, team2Score));
-                        }
-                    }
-                } else if (option == 4) {
-                    System.out.println("Goodbye, and thank you for using the SoccerSimulator!");
-                    exit = true;
-                } else {
-                    System.out.println("That is an invalid number. Please try again!");
+                switch (option) {
+                    case 1:
+                        addPlayerToTeam(teams, sc);
+                        break;
+    private static void addPlayerToTeam(String[] teams, Scanner sc) {
+        boolean validTeam = false;
+        String teamName;
+
+        System.out.println("Please follow the instructions to enter player data.");
+        do {
+            System.out.println("For which team would you like to enter data?");
+            teamName = sc.nextLine();
+            for (String team : teams) {
+                if (teamName.toLowerCase().equals(team.toLowerCase())) {
+                    validTeam = true;
+                    break;
                 }
-            } catch (Exception e) {
-                System.out.println("That is not a number. Please try again!");
-            }         
-        } while (!exit);   
-    }     
+            }
+            if (teamName.toLowerCase().equals("exit")) break;
+            if (!validTeam) System.out.println("That is not one of the teams. Please try again!");
+        } while (!validTeam);
+
+        if (!teamName.toLowerCase().equals("exit")) {
+            Player player = Player.createPlayer(sc);
+            Team team = new Team(teamName);
+            team.addPlayer(player);
+            player.saveToDatabase(teamName, "jdbc:mysql://localhost/world_cup", "football", "Java is almost as good as football");
+            System.out.println("Player added to the team.");
+        }
     }
+
+    private static void displayPlayersOnTeam(String[] teams, Scanner sc) {
+       boolean validTeam = false;
+    String teamName;
+    System.out.println("Please follow the instructions to get player data.");
+    do {
+        System.out.println("For which team would you like to get player data?");
+        teamName = sc.nextLine();
+        for (String team : teams) {
+            if (teamName.toLowerCase().equals(team.toLowerCase())) {
+                validTeam = true;
+                break;
+            }
+        }
+        if (teamName.toLowerCase().equals("exit")) break;
+        if (!validTeam) System.out.println("That is not one of the teams. Please try again!");
+    } while (!validTeam);
+
+    if (!teamName.toLowerCase().equals("exit")) {
+        DatabaseManager.displayPlayersOnTeam(teamName);
+    }
+    }
+
+
+
+    private static void simulateMatches(String[] teams, Scanner sc) {
+        System.out.println("How many matches would you like to simulate?");
+        int numMatches = Integer.parseInt(sc.nextLine());
+
+        for (int matchNum = 1; matchNum <= numMatches; matchNum++) {
+            String team1 = teams[(int) (Math.floor(Math.random() * teams.length))];
+            String team2;
+            do {
+                team2 = teams[(int) (Math.floor(Math.random() * teams.length))];
+            } while (team1.equals(team2));
+
+            Match match = new Match(new Team(team1), new Team(team2));
+            match.simulateMatch();
+
+            System.out.println("Time for match: " + matchNum);
+            System.out.println(match.getResult());
+        }
+    }
+}
+
     
 
