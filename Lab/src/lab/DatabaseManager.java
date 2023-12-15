@@ -26,10 +26,25 @@ public class DatabaseManager {
         return DriverManager.getConnection(DB_URL, USER, PASS);
           }
 
-    public static void createTables(String[] teams) {
+     public static void createTables(String[] teams) {
     Connection conn = null;
     Statement stmt = null;
     try {
         conn = DriverManager.getConnection("jdbc:mysql://localhost/", USER, PASS);
         stmt = conn.createStatement();
-    }
+
+        // Create 'world_cup' database if not exists
+        stmt.execute("CREATE DATABASE IF NOT EXISTS " + DB_NAME + ";");
+        stmt.execute("USE " + DB_NAME + ";");
+
+        for (String team : teams) {
+            stmt.execute(
+                    "CREATE TABLE IF NOT EXISTS " + team + " ("
+                            + "name VARCHAR(30) NOT NULL,"
+                            + "number INT NOT NULL PRIMARY KEY,"
+                            + "birth VARCHAR(30),"
+                            + "position VARCHAR(30),"
+                            + "goalsScored INT,"
+                            + "background TEXT(1000));"
+            );
+        }
