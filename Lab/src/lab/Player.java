@@ -70,6 +70,14 @@ public class Player {
     public void setBackground(String background) {
         this.background = background;
     }
+    public static Player createPlayer(){
+        
+        
+        
+        
+        return null;
+        
+    }
 
 }
    
