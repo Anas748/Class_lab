@@ -43,7 +43,7 @@ public class Lab {
         boolean exit = false;
         Scanner sc = new Scanner(System.in);
 
-        do {
+               do {
             System.out.println("Welcome! What would you like to do today? Please enter the number corresponding to your choice.");
             System.out.println("1. Enter a new player to a team.");
             System.out.println("2. See the players on a team.");
@@ -57,6 +57,25 @@ public class Lab {
                     case 1:
                         addPlayerToTeam(teams, sc);
                         break;
+                    case 2:
+                        displayPlayersOnTeam(teams, sc);
+                        break;
+                    case 3:
+                        simulateMatches(teams, sc);
+                        break;
+                    case 4:
+                        System.out.println("Goodbye, and thank you for using the SoccerSimulator!");
+                        exit = true;
+                        break;
+                    default:
+                        System.out.println("Invalid option. Please try again.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+            }
+
+        } while (!exit);
+    }
     private static void addPlayerToTeam(String[] teams, Scanner sc) {
         boolean validTeam = false;
         String teamName;
