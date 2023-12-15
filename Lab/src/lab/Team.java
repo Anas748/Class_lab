@@ -12,7 +12,8 @@ import java.util.ArrayList;
  */
 class Team {
 
-        private String name;
+   
+    private String name;
     private ArrayList<Player> players;
 
     public Team(String name) {
