@@ -23,6 +23,8 @@ import java.util.Scanner;
  *
  * Name 4: Abdul Rehman Number 4 2021333
  *
+ * 
+ * GitHub Link:   https://github.com/Anas748/Class_lab
  */
 public class Lab {
 
