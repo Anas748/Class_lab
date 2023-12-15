@@ -36,31 +36,7 @@ public class Lab {
      */
     
          public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        String dbName = "world_cup";
-        String[] teams = {"Ireland", "Brazil", "Argentina", "Japan", "Mexico", "Senegal", "Tunisia", "Qatar"};
-        String DB_URL = "jdbc:mysql://localhost/" + dbName;
-        String USER = "football";
-        String PASS = "Java is almost as good as football";
-        Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/", USER, PASS);
-            Statement stmt = conn.createStatement();
-            stmt.execute("CREATE SCHEMA IF NOT EXISTS " + dbName +";");
-            stmt.execute("USE " + dbName + ";");
-            for (String team : teams) {
-                stmt.execute(
-                        "CREATE TABLE IF NOT EXISTS "+ team + " ("
-                                + "name VARCHAR(30) NOT NULL,"
-                                + "number INT NOT NULL PRIMARY KEY,"
-                                + "birth VARCHAR(30),"
-                                + "position VARCHAR(30),"
-                                + "goalsScored INT,"
-                                + "background TEXT(1000));"
-                );                
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        
         int option;
         boolean exit = false;
         Scanner sc = new Scanner(System.in);
@@ -89,19 +65,7 @@ public class Lab {
                         if (!validTeam) System.out.println("That is not one of the teams. Please try again!");
                     } while (!validTeam);
                   -----------------------------------------------------------------------------------------------------------------
-                    boolean validPlayer = false;
-          
-                    try {
-                        Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                        Statement stmt = conn.createStatement();
-                        stmt.execute(
-                                String.format("INSERT INTO %s (name, number, birth, position, goalsScored, background) "
-                                        + "VALUES (\"%s\", %d, \"%s\", \"%s\", %d,  \"%s\") ;",
-                                        teamName, name, number, birth, position, goalsScored, background)
-                        );
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }      
+                     
                     -----------------------------------------------------------------------------------------------------
                 } else if (option == 2) {
                     boolean validTeam = false;
